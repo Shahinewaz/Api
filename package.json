@@ -2,11 +2,12 @@
   "name": "ff-uid-proxy",
   "version": "1.0.0",
   "type": "module",
-  "main": "ffinfo.js",
+  "main": "index.js",
   "scripts": {
-    "start": "echo Serverless deployed"
+    "start": "node index.js"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "node-fetch": "^2.6.9"
   }
 }
