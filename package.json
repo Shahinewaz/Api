@@ -1,0 +1,11 @@
+{
+  "name": "ff-uid-proxy",
+  "version": "1.0.0",
+  "main": "ffinfo.js",
+  "scripts": {
+    "start": "echo Serverless deployed"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.9"
+  }
+}
