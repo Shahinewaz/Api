@@ -1,14 +1,15 @@
-// Node.js / Vercel Serverless API
+import express from "express";
 import fetch from "node-fetch";
 
-export default async function handler(req, res) {
-  const { uid } = req.method === "GET" ? req.query : req.body;
+const app = express();
+app.use(express.json());
 
+app.post("/api/ffinfo", async (req, res) => {
+  const { uid } = req.body;
   if (!uid) return res.status(400).json({ error: "UID missing" });
 
   try {
-    const targetUrl = `https://gameskinbo.com/api/free_fire_id_checker?uid=${uid}`;
-    const response = await fetch(targetUrl, {
+    const response = await fetch(`https://gameskinbo.com/api/free_fire_id_checker?uid=${uid}`, {
       headers: {
         "Referer": "https://gameskinbo.com/",
         "User-Agent": "Mozilla/5.0 (Linux; Android 11; vivo 1906)",
@@ -18,13 +19,11 @@ export default async function handler(req, res) {
     });
 
     const text = await response.text();
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    try {
-      res.json(JSON.parse(text));
-    } catch {
-      res.send(text);
-    }
+    res.json(JSON.parse(text));
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
