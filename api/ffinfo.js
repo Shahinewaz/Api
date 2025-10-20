@@ -19,9 +19,15 @@ app.post("/api/ffinfo", async (req, res) => {
     });
 
     const text = await response.text();
-    res.json(JSON.parse(text));
+    try {
+      res.json(JSON.parse(text));
+    } catch (err) {
+      console.error("JSON parse error:", err);
+      res.status(500).json({ error: "Failed to parse API response" });
+    }
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Fetch error:", err);
+    res.status(500).json({ error: "Failed to fetch API" });
   }
 });
 
