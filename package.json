@@ -1,7 +1,8 @@
 {
   "name": "ff-uid-proxy",
   "version": "1.0.0",
-  "main": "ffinfo.js",
+  "type": "module",
+  "main": "api/ffinfo.js",
   "scripts": {
     "start": "echo Serverless deployed"
   },
